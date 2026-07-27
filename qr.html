@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>💌 ถึงคนพิเศษของเรา</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Mali:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Mali',cursive;
+}
+
+body{
+    background:linear-gradient(135deg,#ffd6e8,#ffeaf4);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    overflow:hidden;
+}
+
+.card{
+    width:90%;
+    max-width:420px;
+    background:white;
+    border-radius:25px;
+    padding:35px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(255,105,180,.2);
+    animation:fade .6s;
+}
+
+h1{
+    color:#ff5f9d;
+    margin-bottom:20px;
+}
+
+p{
+    color:#555;
+    line-height:1.9;
+    margin:12px 0;
+}
+
+button{
+    margin-top:25px;
+    border:none;
+    background:#ff74ad;
+    color:white;
+    padding:14px 28px;
+    border-radius:50px;
+    font-size:17px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+button:hover{
+    transform:scale(1.05);
+    background:#ff4e95;
+}
+
+@keyframes fade{
+from{opacity:0;transform:translateY(20px);}
+to{opacity:1;transform:translateY(0);}
+}
+
+.heart{
+position:absolute;
+color:pink;
+font-size:20px;
+animation:float 7s linear infinite;
+}
+
+@keyframes float{
+0%{
+transform:translateY(100vh);
+opacity:0;
+}
+20%{
+opacity:1;
+}
+100%{
+transform:translateY(-120vh);
+opacity:0;
+}
+}
+
+.big{
+font-size:28px;
+color:#ff4d94;
+font-weight:bold;
+}
+</style>
+
+</head>
+<body>
+
+<div class="card">
+
+<h1 id="title">💌 ถึงคนพิเศษของเรา</h1>
+
+<div id="content">
+
+<p>มีข้อความหนึ่ง...</p>
+
+<p>ที่เราอยากให้เธออ่านจนจบ</p>
+
+<p>พร้อมแล้วกดปุ่มด้านล่างนะ 😊</p>
+
+</div>
+
+<button onclick="nextPage()">เริ่มอ่าน 💗</button>
+
+</div>
+
+<script>
+
+const pages=[
+
+`
+<p>สวัสดีคนเก่ง 👋</p>
+
+<p>ถ้าเธอกำลังอ่านข้อความนี้อยู่</p>
+
+<p>แปลว่าเธอยอมสแกน QR Code ของเราแล้ว</p>
+
+<p>ขอบคุณนะ ❤️</p>
+`,
+
+`
+<p>ช่วงเกือบเดือนที่ผ่านมา</p>
+
+<p>จากคนที่ไม่รู้จักกัน</p>
+
+<p>กลายเป็นคนที่เรารอคุยทุกวัน</p>
+
+<p>ทุกครั้งที่โทร</p>
+
+<p>ทุกครั้งที่แชต</p>
+
+<p>ทุกครั้งที่ได้หัวเราะกับเธอ</p>
+
+<p>มันทำให้วันธรรมดาของเราพิเศษขึ้นมาก</p>
+`,
+
+`
+<p>ขอบคุณ...</p>
+
+<p>ที่คอยอยู่ด้วยกัน</p>
+
+<p>คอยฟังเราบ่น</p>
+
+<p>คอยทำให้เรายิ้ม</p>
+
+<p>และเข้ามาเป็นความสุขในทุก ๆ วัน</p>
+`,
+
+`
+<p>จริง ๆ แล้ว...</p>
+
+<p>มีเรื่องหนึ่ง</p>
+
+<p>ที่เราอยากบอกเธอ</p>
+
+<p>แต่เราอยากพูดมัน</p>
+
+<p>ต่อหน้าเธอมากกว่า ❤️</p>
+
+<br>
+
+<p>พร้อมไหม?</p>
+
+<p id="count"></p>
+`
+
+];
+
+let current=0;
+
+function nextPage(){
+
+    if(current < pages.length){
+
+        document.getElementById("content").innerHTML = pages[current];
+
+        current++;
+
+        if(current == pages.length){
+
+            let btn = document.querySelector("button");
+
+            btn.innerHTML = "💗 พร้อมแล้ว";
+
+            btn.onclick = startCount;
+
+        }else{
+
+            document.querySelector("button").innerHTML = "ถัดไป ➜";
+
+        }
+
+    }
+
+}
+
+
+function startCount(){
+
+    let n = 3;
+
+    let button = document.querySelector("button");
+
+    button.style.display = "none";
+
+
+    let count = document.getElementById("count");
+
+
+    let timer = setInterval(()=>{
+
+
+        count.innerHTML = n + "...";
+
+
+        n--;
+
+
+        if(n < 0){
+
+
+            clearInterval(timer);
+
+
+            count.innerHTML = `
+            <p class="big">
+            🌹 ลองหันไปข้างหลังสิ ❤️
+            </p>
+            `;
+
+
+        }
+
+
+    },1000);
+
+}
+
+function heart(){
+
+const h=document.createElement("div");
+
+h.className="heart";
+
+h.innerHTML=Math.random()>0.5?"💗":"🌸";
+
+h.style.left=Math.random()*100+"vw";
+
+h.style.fontSize=(15+Math.random()*20)+"px";
+
+h.style.animationDuration=(5+Math.random()*5)+"s";
+
+document.body.appendChild(h);
+
+setTimeout(()=>{
+
+h.remove();
+
+},9000);
+
+}
+
+setInterval(heart,500);
+
+</script>
+
+</body>
+</html>
